@@ -11,6 +11,7 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import "./SearchBar.scss";
 
 export default function SearchBar({ panTo }) {
   const {
@@ -39,7 +40,7 @@ export default function SearchBar({ panTo }) {
   };
 
   return (
-    <div className="SearchField">
+    <div className="SearchBar">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}

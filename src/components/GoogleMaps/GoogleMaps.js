@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import "./GoogleMaps.scss";
 
 const libraries = ["places"];
