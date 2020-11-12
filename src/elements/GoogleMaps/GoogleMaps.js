@@ -1,8 +1,31 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import "./GoogleMaps.scss";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import "./GoogleMaps.scss";
+
+const libraries = ["places"];
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+};
+const mapContainerStyle = {
+  width: "100%",
+  height: "100%",
+};
+const center = {
+  lat: 45.5316,
+  lng: -122.6668,
+};
+
 export default function GoogleMapsElement() {
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries,
+  });
+
+  const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [markersState, setMarkersState] = useState([
     {
@@ -15,6 +38,18 @@ export default function GoogleMapsElement() {
 
   useEffect(() => {
     setSelectedState();
+
+    if (!navigator.geolocation) {
+      return;
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUserLocation(position);
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
   }, []);
 
   const mapRef = useRef();
@@ -22,42 +57,48 @@ export default function GoogleMapsElement() {
     mapRef.current = map;
   }, []);
 
-  const options = {
-    styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true,
-  };
-  const mapContainerStyle = {
-    width: "100%",
-    height: "100%",
-  };
-  const center = {
-    lat: 45.5316,
-    lng: -122.6668,
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
+  const handleMarkerOnClick = (marker) => {
+    setSelectedState(marker);
+    const lat = marker.lat;
+    const lng = marker.lng;
+    panTo({ lat, lng });
   };
 
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps";
 
   return (
     <>
+      <SearchBar panTo={panTo} />
       <div className="GoogleMaps">
         <GoogleMap
+          id="map"
           mapContainerStyle={mapContainerStyle}
           zoom={12}
           center={center}
           options={options}
           onLoad={onMapLoad}
         >
+          {!userLocation ? null : (
+            <Marker
+              icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+              position={{
+                lat: userLocation.coords.latitude,
+                lng: userLocation.coords.longitude,
+              }}
+            />
+          )}
           {markersState.map((marker) => {
             return (
               <Marker
                 key={marker.id}
                 position={{ lat: marker.lat, lng: marker.lng }}
-                onClick={() => setSelectedState(marker)}
+                onClick={() => handleMarkerOnClick(marker)}
               />
             );
           })}
