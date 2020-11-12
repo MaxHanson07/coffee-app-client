@@ -4,11 +4,6 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 export default function GoogleMapsElement() {
   const [selectedState, setSelectedState] = useState(null);
-
-  useEffect(() => {
-    setSelectedState();
-  }, []);
-
   const [markersState, setMarkersState] = useState([
     {
       id: 1,
@@ -17,6 +12,10 @@ export default function GoogleMapsElement() {
       lng: -122.644432,
     },
   ]);
+
+  useEffect(() => {
+    setSelectedState();
+  }, []);
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
