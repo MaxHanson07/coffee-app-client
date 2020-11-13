@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
+import API from "../../utils/API";
 import "./Request.scss";
 
 export default function Request() {
@@ -19,21 +20,21 @@ export default function Request() {
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    // API.saveBook({
-    //   email: formResults.email,
-    //   cafe_name: formResults.cafe,
-    //   cafe_address: formResults.address,
-    //   notes: formResults.notes,
-    // })
-    //   .then(
-    //     setFormResults({
-    //       email: "",
-    //       cafe: "",
-    //       address: "",
-    //       notes: "",
-    //     })
-    //   )
-    //   .catch((err) => console.log(err));
+    API.createRequest({
+      email: formResults.email,
+      cafe_name: formResults.cafe,
+      cafe_address: formResults.address,
+      notes: formResults.notes,
+    })
+      .then(
+        setFormResults({
+          email: "",
+          cafe: "",
+          address: "",
+          notes: "",
+        })
+      )
+      .catch((err) => console.log(err));
   }
 
   return (

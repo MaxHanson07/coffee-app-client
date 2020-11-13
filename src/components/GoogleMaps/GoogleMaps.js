@@ -1,9 +1,11 @@
+/*global google*/
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
-import "./GoogleMaps.scss";
 import Info from "../Info/Info";
+import Cafe from "./tempInfo.json";
+import "./GoogleMaps.scss";
 
 const libraries = ["places"];
 const options = {
@@ -28,17 +30,11 @@ export default function GoogleMapsElement() {
 
   const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
-  const [markersState, setMarkersState] = useState([
-    {
-      id: 1,
-      title: "Proud Mary",
-      lat: 45.558861,
-      lng: -122.644432,
-    },
-  ]);
+  const [markersState, setMarkersState] = useState(null);
 
   useEffect(() => {
     setSelectedState();
+    setMarkersState(Cafe);
 
     if (!navigator.geolocation) {
       return;
@@ -60,7 +56,7 @@ export default function GoogleMapsElement() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(16);
+    mapRef.current.setZoom(13);
   }, []);
 
   const handleMarkerOnClick = (marker) => {
@@ -106,10 +102,20 @@ export default function GoogleMapsElement() {
           })}
         </GoogleMap>
       </div>
-      <div className="Info">
-        {!selectedState ? null : <p>{selectedState.title}</p>}
-      </div>
-      <Info />
+
+      {!selectedState ? null : (
+        <Info
+          key={selectedState.id}
+          name={selectedState.name}
+          image_url={selectedState.image_url}
+          weekday_hours={selectedState.weekday_hours}
+          address={selectedState.address}
+          website={selectedState.website}
+          instagram_link={selectedState.instagram_link}
+          phone={selectedState.phone}
+          roaster={selectedState.roaster}
+        />
+      )}
     </>
   );
 }
