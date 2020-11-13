@@ -60,7 +60,7 @@ export default function GoogleMapsElement() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(16);
   }, []);
 
   const handleMarkerOnClick = (marker) => {
