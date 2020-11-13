@@ -86,6 +86,7 @@ export default function GoogleMapsElement() {
         >
           {!userLocation ? null : (
             <Marker
+              key={userLocation.coords.latitude}
               icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
               position={{
                 lat: userLocation.coords.latitude,

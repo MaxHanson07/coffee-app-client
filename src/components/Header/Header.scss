@@ -1,10 +1,11 @@
+@import "../../SCSS/variables.scss";
 header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   grid-row: 1 / span 1;
   grid-column: 1 / span 6;
-  background-color: #1c1919;
+  background-color: $black;
 
   .logo {
     margin-left: 160px;

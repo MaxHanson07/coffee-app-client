@@ -34,6 +34,7 @@ export default function SearchBar({ panTo }) {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
       panTo({ lat, lng });
+      setValue("", false);
     } catch (err) {
       console.error(err);
     }
