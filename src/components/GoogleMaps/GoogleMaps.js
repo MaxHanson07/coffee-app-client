@@ -3,6 +3,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import "./GoogleMaps.scss";
+import Info from "../Info/Info";
 
 const libraries = ["places"];
 const options = {
@@ -108,6 +109,7 @@ export default function GoogleMapsElement() {
       <div className="Info">
         {!selectedState ? null : <p>{selectedState.title}</p>}
       </div>
+      <Info />
     </>
   );
 }
