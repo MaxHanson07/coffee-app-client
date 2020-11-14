@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import "./Request.scss";
 
 export default function Request() {
-  const [formResults, setFormResults] = useState({
+  const [inputState, setInputState] = useState({
     email: "",
     cafe: "",
     address: "",
@@ -14,33 +14,31 @@ export default function Request() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormResults({ ...formResults, [name]: value });
+    setInputState({ ...inputState, [name]: value });
   };
 
   function handleFormSubmit(event) {
     event.preventDefault();
-
     API.createRequest({
-      email: formResults.email,
-      cafe_name: formResults.cafe,
-      cafe_address: formResults.address,
-      notes: formResults.notes,
-    })
-      .then(
-        setFormResults({
-          email: "",
-          cafe: "",
-          address: "",
-          notes: "",
-        })
-      )
-      .catch((err) => console.log(err));
+      email: inputState.email,
+      cafe_name: inputState.cafe,
+      cafe_address: inputState.address,
+      notes: inputState.notes,
+    }).catch((err) => console.log(err));
+
+    setInputState({
+      email: "",
+      cafe: "",
+      address: "",
+      notes: "",
+    });
   }
 
   return (
     <form className="Request">
       <h4>Add a Cafe?</h4>
       <InputField
+        value={inputState.email}
         type="text"
         name="email"
         placeholder="email"
@@ -48,6 +46,7 @@ export default function Request() {
         onChange={handleInputChange}
       />
       <InputField
+        value={inputState.cafe}
         type="text"
         name="cafe"
         placeholder="cafe"
@@ -55,6 +54,7 @@ export default function Request() {
       />
 
       <InputField
+        value={inputState.address}
         type="text"
         pattern="[a-zA-Z0-9]"
         name="address"
@@ -62,6 +62,7 @@ export default function Request() {
         onChange={handleInputChange}
       />
       <InputField
+        value={inputState.notes}
         type="text"
         name="notes"
         placeholder="notes"
@@ -69,7 +70,7 @@ export default function Request() {
       />
 
       <Button
-        disabled={!formResults.cafe && !formResults.city}
+        disabled={inputState.cafe === ""}
         onClick={handleFormSubmit}
         name="Submit"
       />

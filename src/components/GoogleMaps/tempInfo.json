@@ -9,7 +9,8 @@
     "instagram_link": "proudmaryusa",
     "weekday_hours": "8-4pm",
     "image_url":"https://cdn.broadsheet.com.au/cache/e7/a6/e7a6716835c26b25c7da5f63a2a241f9.jpg",
-    "roaster": "Proud Mary"
+    "roaster": "Proud Mary",
+    "isFeatured":true
 },
 {
     "id": 2,
@@ -21,9 +22,7 @@
     "website": "https://extractocoffee.com/",
     "weekday_hours": "8-2pm",
     "image_url":"http://www.connectfish.com/wp-content/gallery/portland_2/IMG_7632.jpg",
-    "roaster": "Extracto"
-
+    "roaster": "Extracto",
+    "isFeatured": true
 }
-
-
 ]

@@ -1,4 +1,3 @@
-/*global google*/
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
@@ -103,7 +102,25 @@ export default function GoogleMapsElement() {
         </GoogleMap>
       </div>
 
-      {!selectedState ? null : (
+      {!selectedState ? (
+        markersState.map((marker) => {
+          if (marker.isFeatured === true) {
+            return (
+              <Info
+                key={marker.id}
+                name={marker.name}
+                image_url={marker.image_url}
+                weekday_hours={marker.weekday_hours}
+                address={marker.address}
+                website={marker.website}
+                instagram_link={marker.instagram_link}
+                phone={marker.phone}
+                roaster={marker.roaster}
+              />
+            );
+          }
+        })
+      ) : (
         <Info
           key={selectedState.id}
           name={selectedState.name}
