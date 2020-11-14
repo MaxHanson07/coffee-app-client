@@ -1,0 +1,28 @@
+[{
+    "id": 1,
+    "name": "Proud Mary",
+    "lat": 45.558861,
+    "lng": -122.644432,
+    "address": "2012 NE Alberta St, Portland, OR 97211",
+    "phone": "(503) 208-3475",
+    "website": "https://proudmarycoffee.com/",
+    "instagram_link": "proudmaryusa",
+    "weekday_hours": "8-4pm",
+    "image_url":"https://cdn.broadsheet.com.au/cache/e7/a6/e7a6716835c26b25c7da5f63a2a241f9.jpg",
+    "roaster": "Proud Mary",
+    "isFeatured":true
+},
+{
+    "id": 2,
+    "name": "Extracto",
+    "lat": 45.562930,
+    "lng": -122.635380,
+    "address": "2921 NE Killingsworth St, Portland, OR 97211",
+    "phone": "(503) 281-1764",
+    "website": "https://extractocoffee.com/",
+    "weekday_hours": "8-2pm",
+    "image_url":"http://www.connectfish.com/wp-content/gallery/portland_2/IMG_7632.jpg",
+    "roaster": "Extracto",
+    "isFeatured": true
+}
+]
