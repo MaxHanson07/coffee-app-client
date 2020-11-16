@@ -12,19 +12,27 @@ export default function Request() {
     notes: "",
   });
 
+  const [success, setSuccess] = useState(false);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInputState({ ...inputState, [name]: value });
   };
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    API.createRequest({
-      email: inputState.email,
-      cafe_name: inputState.cafe,
-      cafe_address: inputState.address,
-      notes: inputState.notes,
-    }).catch((err) => console.log(err));
+  async function handleFormSubmit(event) {
+    try {
+      event.preventDefault();
+      API.createRequest({
+        email: inputState.email,
+        cafe_name: inputState.cafe,
+        cafe_address: inputState.address,
+        notes: inputState.notes,
+      });
+
+      setSuccess(true);
+    } catch (err) {
+      console.log(err);
+    }
 
     setInputState({
       email: "",
@@ -32,11 +40,18 @@ export default function Request() {
       address: "",
       notes: "",
     });
+
+    setTimeout(function () {
+      setSuccess(false);
+    }, 1000);
   }
 
   return (
     <form className="Request">
       <h4>Add a Cafe?</h4>
+      <div className="Response">
+        {success === true ? <p>Request Successful</p> : null}
+      </div>
       <InputField
         value={inputState.email}
         type="text"
