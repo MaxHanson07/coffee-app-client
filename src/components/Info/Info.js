@@ -7,7 +7,22 @@ import "./Info.scss";
 import Button from "../Button/Button";
 import API from "../../utils/API";
 
+
 export default function Info(props) {
+
+  // const [likes, setLikes] = useState([]);
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    console.log("props.id: " + props.id)
+  
+    API.addLike(props.id, {
+      
+    }).then((res) => console.log(res, API.addLike(props.id)));
+  
+  }
+
   return (
     <>
       <div className="Info">
@@ -26,7 +41,7 @@ export default function Info(props) {
               <Button
                 className="Btn"
                 name="Like"
-                onClick={()=>{API.addLike(props._id).catch((err) => console.log(err))}}
+                onClick={handleFormSubmit}
               />
             </>
         </div>
