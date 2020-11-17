@@ -7,4 +7,7 @@ export default {
       cafeData
     );
   },
+  getAllCafes: function () {
+    return axios.get(process.env.REACT_APP_SERVER_URL + "/api/cafes");
+  },
 };
