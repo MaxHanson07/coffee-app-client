@@ -3,9 +3,9 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import Info from "../Info/Info";
-import Cafe from "./tempInfo.json";
 import CustomMarker from "../../Images/googlemarker.png";
 import "./GoogleMaps.scss";
+import API from "../../utils/API";
 
 const libraries = ["places"];
 const options = {
@@ -34,17 +34,25 @@ export default function GoogleMapsElement() {
 
   useEffect(() => {
     setSelectedState();
-    setMarkersState(Cafe);
+
+    API.getAllCafes()
+      .then((res) => {
+        setMarkersState(res.data);
+      })
+      .catch((err) => console.log(err));
 
     if (!navigator.geolocation) {
       return;
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
         setUserLocation(position);
-        panTo({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+
+        setTimeout(function () {
+          panTo({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        }, 10);
       });
     }
   }, []);
@@ -106,7 +114,7 @@ export default function GoogleMapsElement() {
 
       {!selectedState ? (
         markersState.map((marker) => {
-          if (marker.isFeatured === true) {
+          if (marker.is_featured === true) {
             return (
               <Info
                 key={marker.id}
@@ -114,27 +122,26 @@ export default function GoogleMapsElement() {
                 name={marker.name}
                 image_url={marker.image_url}
                 weekday_hours={marker.weekday_hours}
-                likes={marker.likes}
                 address={marker.address}
                 website={marker.website}
-                instagram_link={marker.instagram_link}
-                phone={marker.phone}
-                roaster={marker.roaster}
+                instagram_link={marker.instagram_url}
+                phone={marker.formatted_phone_number}
+                roaster={marker.roasters}
+                likes={marker.likes}
               />
             );
           }
         })
       ) : (
         <Info
-          key={selectedState.id}
+          key={selectedState._id}
           name={selectedState.name}
-          image_url={selectedState.image_url}
-          weekday_hours={selectedState.weekday_hours}
-          address={selectedState.address}
+          image_url={selectedState.photos[0].photo_url}
+          address={selectedState.formatted_address}
           website={selectedState.website}
-          instagram_link={selectedState.instagram_link}
-          phone={selectedState.phone}
-          roaster={selectedState.roaster}
+          instagram_link={selectedState.instagram_url}
+          phone={selectedState.formatted_phone_number}
+          roaster={selectedState.roasters}
         />
       )}
     </>

@@ -12,5 +12,8 @@ export default {
       process.env.REACT_APP_SERVER_URL + "/api/cafes/like/"
       + id
       );
+  },
+  getAllCafes: function () {
+    return axios.get(process.env.REACT_APP_SERVER_URL + "/api/cafes");
   }
 }
