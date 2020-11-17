@@ -8,6 +8,7 @@
     "website": "https://proudmarycoffee.com/",
     "instagram_link": "proudmaryusa",
     "weekday_hours": "8-4pm",
+    "likes": 0,
     "image_url":"https://cdn.broadsheet.com.au/cache/e7/a6/e7a6716835c26b25c7da5f63a2a241f9.jpg",
     "roaster": "Proud Mary",
     "isFeatured":true
@@ -19,6 +20,7 @@
     "lng": -122.635380,
     "address": "2921 NE Killingsworth St, Portland, OR 97211",
     "phone": "(503) 281-1764",
+    "likes": 0,
     "website": "https://extractocoffee.com/",
     "weekday_hours": "8-2pm",
     "image_url":"http://www.connectfish.com/wp-content/gallery/portland_2/IMG_7632.jpg",

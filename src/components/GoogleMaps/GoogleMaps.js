@@ -114,6 +114,7 @@ export default function GoogleMapsElement() {
                 name={marker.name}
                 image_url={marker.image_url}
                 weekday_hours={marker.weekday_hours}
+                likes={marker.likes}
                 address={marker.address}
                 website={marker.website}
                 instagram_link={marker.instagram_link}
