@@ -10,3 +10,10 @@
   font-family: $font-family;
   font-size: 12px;
 }
+
+@media screen and (max-width: 1120px) {
+  .Footer {
+    grid-row: 4 / span 1;
+    grid-column: 2 / span 1;
+  }
+}

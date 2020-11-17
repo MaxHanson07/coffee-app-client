@@ -16,3 +16,9 @@
     font-family: $font-family;
   }
 }
+
+@media screen and (max-width: 1120px) {
+  .SearchBar {
+    grid-column: 2 / span 1;
+  }
+}

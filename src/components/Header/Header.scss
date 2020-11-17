@@ -13,3 +13,12 @@ header {
     height: 40px;
   }
 }
+
+@media screen and (max-width: 1120px) {
+  header {
+    grid-column: 1 / span 4;
+    .logo {
+      margin-left: 40px;
+    }
+  }
+}
