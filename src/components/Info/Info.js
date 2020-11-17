@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Footer from "../Footer/Footer";
 import "./Info.scss";
+import Button from "../Button/Button";
+import API from "../../utils/API";
 
 export default function Info(props) {
   return (
@@ -24,7 +26,7 @@ export default function Info(props) {
               <Button
                 className="Btn"
                 name="Like"
-                onClick={handleFormSubmit}
+                onClick={API.addLike}
                 // disabled={!id}
               />
             </>
