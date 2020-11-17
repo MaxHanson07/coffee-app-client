@@ -41,10 +41,13 @@ export default function GoogleMapsElement() {
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
         setUserLocation(position);
-        panTo({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+
+        setTimeout(function () {
+          panTo({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        }, 10);
       });
     }
   }, []);
@@ -106,18 +109,18 @@ export default function GoogleMapsElement() {
 
       {!selectedState ? (
         markersState.map((marker) => {
-          if (marker.isFeatured === true) {
+          if (marker.is_featured === true) {
             return (
               <Info
-                key={marker.id}
+                key={marker._id}
                 name={marker.name}
-                image_url={marker.image_url}
-                weekday_hours={marker.weekday_hours}
-                address={marker.address}
+                image_url={marker.photos[0].photo_url}
+                address={marker.formatted_address}
                 website={marker.website}
-                instagram_link={marker.instagram_link}
-                phone={marker.phone}
-                roaster={marker.roaster}
+                instagram_link={marker.instagram_url}
+                phone={marker.formatted_phone_number}
+                roaster={marker.roasters}
+                likes={marker.likes}
               />
             );
           }
@@ -126,13 +129,12 @@ export default function GoogleMapsElement() {
         <Info
           key={selectedState.id}
           name={selectedState.name}
-          image_url={selectedState.image_url}
-          weekday_hours={selectedState.weekday_hours}
-          address={selectedState.address}
+          image_url={selectedState.photos[0].photo_url}
+          address={selectedState.formatted_address}
           website={selectedState.website}
-          instagram_link={selectedState.instagram_link}
-          phone={selectedState.phone}
-          roaster={selectedState.roaster}
+          instagram_link={selectedState.instagram_url}
+          phone={selectedState.formatted_phone_number}
+          roaster={selectedState.roasters}
         />
       )}
     </>

@@ -1,28 +1,31 @@
-[{
-    "id": 1,
-    "name": "Proud Mary",
-    "lat": 45.558861,
-    "lng": -122.644432,
-    "address": "2012 NE Alberta St, Portland, OR 97211",
-    "phone": "(503) 208-3475",
-    "website": "https://proudmarycoffee.com/",
-    "instagram_link": "proudmaryusa",
-    "weekday_hours": "8-4pm",
-    "image_url":"https://cdn.broadsheet.com.au/cache/e7/a6/e7a6716835c26b25c7da5f63a2a241f9.jpg",
-    "roaster": "Proud Mary",
-    "isFeatured":true
-},
+[
 {
-    "id": 2,
-    "name": "Extracto",
-    "lat": 45.562930,
-    "lng": -122.635380,
-    "address": "2921 NE Killingsworth St, Portland, OR 97211",
-    "phone": "(503) 281-1764",
-    "website": "https://extractocoffee.com/",
-    "weekday_hours": "8-2pm",
-    "image_url":"http://www.connectfish.com/wp-content/gallery/portland_2/IMG_7632.jpg",
-    "roaster": "Extracto",
-    "isFeatured": true
+    "_id" :"5fb4194efef89c283d251639",
+    "weekday_text" : [],
+    "photos" : [ 
+        {
+            "height" : 2719,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/115722092659527598998\">Seiji Nanbu</a>"
+            ],
+            "photo_reference" : "CmRaAAAAFHZKBZvcksNmXf9ib6YNI2KVGhc8GZuVcKvsBOIhAqPGvgRYAO5OQDp5b8T1o2BEY7Smi95M3EcTUqY1yvpIaRCqXnotDqqqwJq_SDnZ9tfdYwQ-z0cp1CVXgLOUPZuqEhBUQlyDs7UQeaIKLGtYaTjAGhRV9pAuuN3qS-p_zR9iPXRODoxKxg",
+            "width" : 2719,
+            "photo_url" : "https://lh3.googleusercontent.com/p/AF1QipP96KuGdons2TIusmjzAQ9Amkhikx9xseToLu5g=s1600-w500-h500"
+        }
+    ],
+    "roasters" : [],
+    "custom_photos" : [ 
+        null
+    ],
+    "is_featured" : true,
+    "name" : "Heart Coffee (Burnside)",
+    "lat" : 45.5230255,
+    "lng" : -122.6431961,
+    "formatted_address" : "2211 E Burnside St, Portland, OR 97214, USA",
+    "formatted_phone_number" : "(503) 206-6602",
+    "website" : "http://heartroasters.com/",
+    "instagram_url" : "heartcoffee",
+    "likes" : 0,
+    "__v" : 0
 }
 ]
