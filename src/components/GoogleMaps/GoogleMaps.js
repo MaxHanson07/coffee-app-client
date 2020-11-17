@@ -4,6 +4,7 @@ import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import Info from "../Info/Info";
 import Cafe from "./tempInfo.json";
+import CustomMarker from "../../Images/googlemarker.png";
 import "./GoogleMaps.scss";
 
 const libraries = ["places"];
@@ -94,6 +95,7 @@ export default function GoogleMapsElement() {
             return (
               <Marker
                 key={marker.id}
+                icon={CustomMarker}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => handleMarkerOnClick(marker)}
               />
