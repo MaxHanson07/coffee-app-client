@@ -102,7 +102,7 @@ export default function GoogleMapsElement() {
           {markersState.map((marker) => {
             return (
               <Marker
-                key={marker.id}
+                key={marker._id}
                 icon={CustomMarker}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => handleMarkerOnClick(marker)}
@@ -117,12 +117,11 @@ export default function GoogleMapsElement() {
           if (marker.is_featured === true) {
             return (
               <Info
-                key={marker.id}
-                id={marker.id}
+                key={marker._id}
+                id={marker._id}
                 name={marker.name}
-                image_url={marker.image_url}
-                weekday_hours={marker.weekday_hours}
-                address={marker.address}
+                image_url={marker.photos[0].photo_url}
+                address={marker.formatted_address}
                 website={marker.website}
                 instagram_link={marker.instagram_url}
                 phone={marker.formatted_phone_number}
@@ -135,6 +134,7 @@ export default function GoogleMapsElement() {
       ) : (
         <Info
           key={selectedState._id}
+          id={selectedState._id}
           name={selectedState.name}
           image_url={selectedState.photos[0].photo_url}
           address={selectedState.formatted_address}
@@ -142,6 +142,7 @@ export default function GoogleMapsElement() {
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
           roaster={selectedState.roasters}
+          likes={selectedState.likes}
         />
       )}
     </>
