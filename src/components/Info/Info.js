@@ -18,7 +18,7 @@ export default function Info(props) {
         <div className="hours">
           <h5>Likes</h5>
           <ul>
-            <li>{props.weekday_hours}</li>
+            <li>{props.likes}</li>
           </ul>
         </div>
         <div className="BtnDiv">
@@ -26,7 +26,9 @@ export default function Info(props) {
               <Button
                 className="Btn"
                 name="Like"
-                onClick={API.addLike}
+                onClick={API.addLike(props._id).catch((err) => console.log(err))
+                }
+                
                 // disabled={!id}
               />
             </>
