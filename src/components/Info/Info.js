@@ -26,10 +26,7 @@ export default function Info(props) {
               <Button
                 className="Btn"
                 name="Like"
-                onClick={API.addLike(props._id).catch((err) => console.log(err))
-                }
-                
-                // disabled={!id}
+                onClick={()=>{API.addLike(props._id).catch((err) => console.log(err))}}
               />
             </>
         </div>
