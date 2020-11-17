@@ -3,9 +3,9 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import Info from "../Info/Info";
-import Cafe from "./tempInfo.json";
 import CustomMarker from "../../Images/googlemarker.png";
 import "./GoogleMaps.scss";
+import API from "../../utils/API";
 
 const libraries = ["places"];
 const options = {
@@ -34,7 +34,12 @@ export default function GoogleMapsElement() {
 
   useEffect(() => {
     setSelectedState();
-    setMarkersState(Cafe);
+
+    API.getAllCafes()
+      .then((res) => {
+        setMarkersState(res.data);
+      })
+      .catch((err) => console.log(err));
 
     if (!navigator.geolocation) {
       return;
@@ -127,7 +132,7 @@ export default function GoogleMapsElement() {
         })
       ) : (
         <Info
-          key={selectedState.id}
+          key={selectedState._id}
           name={selectedState.name}
           image_url={selectedState.photos[0].photo_url}
           address={selectedState.formatted_address}
