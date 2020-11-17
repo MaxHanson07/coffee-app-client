@@ -110,6 +110,7 @@ export default function GoogleMapsElement() {
             return (
               <Info
                 key={marker.id}
+                id={marker.id}
                 name={marker.name}
                 image_url={marker.image_url}
                 weekday_hours={marker.weekday_hours}
