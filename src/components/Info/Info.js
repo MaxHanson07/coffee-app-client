@@ -4,8 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Footer from "../Footer/Footer";
 import "./Info.scss";
+import Button from "../Button/Button";
+import API from "../../utils/API";
+
 
 export default function Info(props) {
+
+  // const [likes, setLikes] = useState([]);
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    console.log("props.id: " + props.id)
+  
+    API.addLike(props.id, {
+      
+    }).then((res) => console.log(res, API.addLike(props.id)));
+  
+  }
+
   return (
     <>
       <div className="Info">
@@ -16,8 +33,17 @@ export default function Info(props) {
         <div className="hours">
           <h5>Likes</h5>
           <ul>
-            <li>{props.weekday_hours}</li>
+            <li>{props.likes}</li>
           </ul>
+        </div>
+        <div className="BtnDiv">
+            <>
+              <Button
+                className="Btn"
+                name="Like"
+                onClick={handleFormSubmit}
+              />
+            </>
         </div>
         <div className="address">
           <h5>Address</h5>
