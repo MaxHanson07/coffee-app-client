@@ -19,6 +19,16 @@ export default function Info(props) {
             <li>{props.weekday_hours}</li>
           </ul>
         </div>
+        <div className="BtnDiv">
+            <>
+              <Button
+                className="Btn"
+                name="Like"
+                onClick={handleFormSubmit}
+                // disabled={!id}
+              />
+            </>
+        </div>
         <div className="address">
           <h5>Address</h5>
           <p>{props.address}</p>
