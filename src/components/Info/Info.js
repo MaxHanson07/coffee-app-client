@@ -1,7 +1,7 @@
 import { faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import "./Info.scss";
 import Button from "../Button/Button";
@@ -10,16 +10,30 @@ import API from "../../utils/API";
 
 export default function Info(props) {
 
-  // const [likes, setLikes] = useState([]);
+  const [liked, setLiked] = useState([]);
+  let likeBoolean = false;
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
+    let data;
+    
     console.log("props.id: " + props.id)
-  
-    API.addLike(props.id, {
-      
-    }).then((res) => console.log(res, API.addLike(props.id)));
+    console.log("Liked b4: " + likeBoolean)
+
+    if (!likeBoolean) {
+      data = "1";
+      likeBoolean = true;
+    }
+    else {
+      data = "-1";
+      likeBoolean = false;
+    }
+
+    console.log("data: " + data)
+    console.log("liked after: " + likeBoolean)
+
+    API.addLike(props.id, {likeValue: data}).then((res) => console.log(res));
   
   }
 
