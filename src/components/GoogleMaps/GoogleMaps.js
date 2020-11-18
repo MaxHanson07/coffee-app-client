@@ -46,13 +46,10 @@ export default function GoogleMapsElement() {
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
         setUserLocation(position);
-
-        setTimeout(function () {
-          panTo({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        }, 10);
+        // panTo({
+        //   lat: position.coords.latitude,
+        //   lng: position.coords.longitude,
+        // });
       });
     }
   }, []);
@@ -102,7 +99,7 @@ export default function GoogleMapsElement() {
           {markersState.map((marker) => {
             return (
               <Marker
-                key={marker.id}
+                key={marker._id}
                 icon={CustomMarker}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => handleMarkerOnClick(marker)}
