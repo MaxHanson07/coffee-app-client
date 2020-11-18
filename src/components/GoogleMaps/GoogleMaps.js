@@ -102,18 +102,16 @@ export default function GoogleMapsElement() {
               }}
             />
           )}
-          {!markersState
-            ? null
-            : markersState.map((marker) => {
-                return (
-                  <Marker
-                    key={marker._id}
-                    icon={CustomMarker}
-                    position={{ lat: marker.lat, lng: marker.lng }}
-                    onClick={() => handleMarkerOnClick(marker)}
-                  />
-                );
-              })}
+          {markersState.map((marker) => {
+            return (
+              <Marker
+                key={marker._id}
+                icon={CustomMarker}
+                position={{ lat: marker.lat, lng: marker.lng }}
+                onClick={() => handleMarkerOnClick(marker)}
+              />
+            );
+          })}
         </GoogleMap>
       </div>
 
