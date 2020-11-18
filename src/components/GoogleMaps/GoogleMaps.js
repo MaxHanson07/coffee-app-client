@@ -24,27 +24,30 @@ const center = {
 
 export default function GoogleMapsElement() {
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyB9QBa0YuuN4CBb-4CMOs3JExZnsZ5juv0",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
 
   const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
-  const [markersState, setMarkersState] = useState(null);
+  const [markersState, setMarkersState] = useState([]);
+  const [featured, setFeatured] = useState(null);
 
   useEffect(() => {
-    setSelectedState();
-
-    API.getAllCafes()
-      .then((res) => {
-        setMarkersState(res.data);
-      })
-      .catch((err) => console.log(err));
-
-    setTimeout(function () {
-      getUserLocation();
-    }, 1000);
+    getCafes();
   }, []);
+
+  useEffect(() => {
+    getFeatured();
+  }, [markersState]);
+
+  const getCafes = async () => {
+    try {
+      const { data } = await API.getAllCafes();
+      setMarkersState(data);
+      getUserLocation();
+    } catch (err) {}
+  };
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -61,6 +64,11 @@ export default function GoogleMapsElement() {
     const lat = marker.lat;
     const lng = marker.lng;
     panTo({ lat, lng });
+  };
+
+  const getFeatured = () => {
+    const featured = markersState.find((marker) => marker.is_featured === true);
+    setFeatured(featured);
   };
 
   const getUserLocation = () => {
@@ -115,36 +123,30 @@ export default function GoogleMapsElement() {
         </GoogleMap>
       </div>
 
-      {!selectedState ? (
-        markersState.map((marker) => {
-          if (marker.is_featured === true) {
-            return (
-              <Info
-                key={marker._id}
-                id={marker._id}
-                name={marker.name}
-                image_url={marker.photos[0].photo_url}
-                address={marker.formatted_address}
-                website={marker.website}
-                instagram_link={marker.instagram_url}
-                phone={marker.formatted_phone_number}
-                // roaster={marker.roasters}
-                likes={marker.likes}
-              />
-            );
-          }
-        })
+      {!featured && !selectedState ? null : !selectedState ? (
+        <Info
+          key={featured._id}
+          id={featured._id}
+          name={featured.name}
+          image_url={!featured.photos ? null : featured.photos[0].photo_url}
+          address={featured.formatted_address}
+          website={featured.website}
+          instagram_link={featured.instagram_url}
+          phone={featured.formatted_phone_number}
+          likes={featured.likes}
+        />
       ) : (
         <Info
           key={selectedState._id}
           id={selectedState._id}
           name={selectedState.name}
-          image_url={selectedState.photos[0].photo_url}
+          image_url={
+            !selectedState.photos ? null : selectedState.photos[0].photo_url
+          }
           address={selectedState.formatted_address}
           website={selectedState.website}
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
-          // roaster={selectedState.roasters}
           likes={selectedState.likes}
         />
       )}

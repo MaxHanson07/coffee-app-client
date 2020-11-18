@@ -1,4 +1,4 @@
-@import "../../SCSS/variables.scss";
+@import url("https://use.typekit.net/rvw7fnr.css");
 
 .Footer {
   grid-column: 4 / span 1;
@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-family: $font-family;
+  font-family: "interstate", "san-serif";
   font-size: 12px;
 }
 
