@@ -24,7 +24,7 @@ const center = {
 
 export default function GoogleMapsElement() {
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyB9QBa0YuuN4CBb-4CMOs3JExZnsZ5juv0",
     libraries,
   });
 
@@ -41,17 +41,9 @@ export default function GoogleMapsElement() {
       })
       .catch((err) => console.log(err));
 
-    if (!navigator.geolocation) {
-      return;
-    } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setUserLocation(position);
-        // panTo({
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude,
-        // });
-      });
-    }
+    setTimeout(function () {
+      getUserLocation();
+    }, 1000);
   }, []);
 
   const mapRef = useRef();
@@ -69,6 +61,20 @@ export default function GoogleMapsElement() {
     const lat = marker.lat;
     const lng = marker.lng;
     panTo({ lat, lng });
+  };
+
+  const getUserLocation = () => {
+    if (!navigator.geolocation) {
+      return;
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUserLocation(position);
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
   };
 
   if (loadError) return "Error loading maps";
@@ -96,16 +102,18 @@ export default function GoogleMapsElement() {
               }}
             />
           )}
-          {markersState.map((marker) => {
-            return (
-              <Marker
-                key={marker._id}
-                icon={CustomMarker}
-                position={{ lat: marker.lat, lng: marker.lng }}
-                onClick={() => handleMarkerOnClick(marker)}
-              />
-            );
-          })}
+          {!markersState
+            ? null
+            : markersState.map((marker) => {
+                return (
+                  <Marker
+                    key={marker._id}
+                    icon={CustomMarker}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    onClick={() => handleMarkerOnClick(marker)}
+                  />
+                );
+              })}
         </GoogleMap>
       </div>
 
@@ -115,13 +123,14 @@ export default function GoogleMapsElement() {
             return (
               <Info
                 key={marker._id}
+                id={marker._id}
                 name={marker.name}
                 image_url={marker.photos[0].photo_url}
                 address={marker.formatted_address}
                 website={marker.website}
                 instagram_link={marker.instagram_url}
                 phone={marker.formatted_phone_number}
-                roaster={marker.roasters}
+                // roaster={marker.roasters}
                 likes={marker.likes}
               />
             );
@@ -130,13 +139,15 @@ export default function GoogleMapsElement() {
       ) : (
         <Info
           key={selectedState._id}
+          id={selectedState._id}
           name={selectedState.name}
           image_url={selectedState.photos[0].photo_url}
           address={selectedState.formatted_address}
           website={selectedState.website}
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
-          roaster={selectedState.roasters}
+          // roaster={selectedState.roasters}
+          likes={selectedState.likes}
         />
       )}
     </>
