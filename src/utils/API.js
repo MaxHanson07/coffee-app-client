@@ -7,10 +7,10 @@ export default {
       cafeData
     );
   },
-  addLike: function (id) {
+  addLike: function (id, data) {
     return axios.put(
       process.env.REACT_APP_SERVER_URL + "/api/cafes/like/"
-      + id
+      + id, data
       );
   },
   getAllCafes: function () {
