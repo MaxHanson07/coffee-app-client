@@ -22,7 +22,7 @@ const center = {
   lng: -122.6668,
 };
 
-export default function GoogleMapsElement() {
+export default function GoogleMapsElement(props) {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -134,6 +134,7 @@ export default function GoogleMapsElement() {
           instagram_link={featured.instagram_url}
           phone={featured.formatted_phone_number}
           likes={featured.likes}
+          profileState={props.profileState}
         />
       ) : (
         <Info
@@ -148,6 +149,7 @@ export default function GoogleMapsElement() {
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
           likes={selectedState.likes}
+          profileState={props.profileState}
         />
       )}
     </>

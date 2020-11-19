@@ -1,11 +1,12 @@
 import { faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
 import {
+  faCheck,
   faGlobe,
   faPhone,
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import API from "../../utils/API";
 import "./Info.scss";
@@ -13,6 +14,22 @@ import "./Info.scss";
 export default function Info(props) {
   const [liked, setLiked] = useState(props.likes);
   const [isLiked, setIsLiked] = useState(false);
+  const [canCheckIn, setCanCheckIn] = useState(true);
+
+  useEffect(() => {
+    let lastCheckIn = localStorage.getItem("checkIn" + props.id)
+    if (lastCheckIn) {
+      if (Date.now() - lastCheckIn < 36e5) {
+        setCanCheckIn(false)
+      } else {
+        localStorage.removeItem("checkIn" + props.id)
+        setCanCheckIn(true)
+      }
+    } else {
+      setCanCheckIn(true)
+    }
+    setTimeout(useEffect, 60000)
+  }, [props, canCheckIn])
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -25,6 +42,20 @@ export default function Info(props) {
 
     if (isLiked === true) {
       return;
+    }
+  }
+
+  async function checkIn(cafe_id, user_id) {
+    try {
+      localStorage.setItem("checkIn" + cafe_id, Date.now())
+      let data = {
+        user_id: user_id,
+        date: Date.now()
+      }
+      await API.checkIn(cafe_id, data)
+      setCanCheckIn(false)
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -73,6 +104,19 @@ export default function Info(props) {
                 <FontAwesomeIcon icon={faPhone} size="1x" /> {props.phone}
               </li>
             )}
+            {props.profileState?.isLoggedIn && canCheckIn ? (
+              <li>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    checkIn(props.id, props.profileState.user_id)
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCheck} size="1x" /> Check in
+                  </a>
+              </li>
+            ) : null}
           </ul>
         </div>
         <div className="roaster">
