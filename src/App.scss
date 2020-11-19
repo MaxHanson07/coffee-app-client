@@ -1,0 +1,16 @@
+.App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns:
+    1fr minmax(320px, 1fr) minmax(480px, 1fr) minmax(320px, 1fr)
+    1fr;
+  grid-template-rows: 80px 720px 300px 100px;
+  background-color: #f7f7fa;
+}
+
+@media screen and (max-width: 1120px) {
+  .App {
+    grid-template-columns: 1fr minmax(480px, 1fr) minmax(320px, 1fr) 1fr;
+  }
+}

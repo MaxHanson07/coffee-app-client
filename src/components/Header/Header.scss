@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 6;
+  background-color: #1c1919;
+
+  .logo {
+    margin-left: 160px;
+    width: 43px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  header {
+    grid-column: 1 / span 4;
+    .logo {
+      margin-left: 40px;
+    }
+  }
+}
