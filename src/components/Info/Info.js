@@ -16,7 +16,12 @@ export default function Info(props) {
   const [isLiked, setIsLiked] = useState(false);
   const [canCheckIn, setCanCheckIn] = useState(true);
 
+  // Check if Check In should be displayed. Check again every time state changes, or at least every minute
   useEffect(() => {
+    checkCheckIn()
+  }, [props, canCheckIn])
+
+  function checkCheckIn() {
     let lastCheckIn = localStorage.getItem("checkIn" + props.id)
     if (lastCheckIn) {
       if (Date.now() - lastCheckIn < 36e5) {
@@ -28,8 +33,8 @@ export default function Info(props) {
     } else {
       setCanCheckIn(true)
     }
-    setTimeout(useEffect, 60000)
-  }, [props, canCheckIn])
+    setTimeout(checkCheckIn, 2000)
+  }
 
   function handleFormSubmit(e) {
     e.preventDefault();
