@@ -80,7 +80,7 @@
 }
 
 .hide {
-  visibility: hidden;
+  visibility: visible;
 }
 
 @media screen and (max-width: 1120px) {
@@ -99,5 +99,8 @@
     grid-column: 2 / span 1;
     margin-left: 240px;
     z-index: 1;
+  }
+  .hide {
+    visibility: hidden;
   }
 }

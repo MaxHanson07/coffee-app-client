@@ -30,7 +30,6 @@
 
 @media screen and (max-width: 1120px) {
   .profile-info {
-    grid-row: 2 / span 1;
-    grid-column: 3 / span 1;
+    display: none;
   }
 }

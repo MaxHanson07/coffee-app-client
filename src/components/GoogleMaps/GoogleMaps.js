@@ -62,6 +62,7 @@ export default function GoogleMapsElement() {
   }, []);
 
   const handleMarkerOnClick = (marker) => {
+    setSelectedOn(true);
     setSelectedState(marker);
     const lat = marker.lat;
     const lng = marker.lng;
@@ -87,6 +88,9 @@ export default function GoogleMapsElement() {
     }
   };
 
+  const onMapClick = useCallback((e) => {
+    setSelectedOn(false);
+  }, []);
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps";
 
@@ -101,6 +105,7 @@ export default function GoogleMapsElement() {
           center={center}
           options={options}
           onLoad={onMapLoad}
+          onClick={onMapClick}
         >
           {!userLocation ? null : (
             <Marker
