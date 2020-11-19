@@ -1,4 +1,3 @@
-@import url("https://use.typekit.net/rvw7fnr.css");
 header {
   display: flex;
   justify-content: space-between;
@@ -24,13 +23,14 @@ header {
     display: inline-flex; 
     align-items: center; 
     color: rgba(0, 0, 0, 0.54); 
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px; 
+    border: none;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);    
     padding: 10px; 
     border-radius: 40px;
-    border: 1px solid transparent; 
     font-size: 14px; 
     font-weight: 500; 
     font-family: "interstate", "san-serif";
+    cursor: pointer;
     span {
       margin-left: 10px;
     }

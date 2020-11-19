@@ -3,6 +3,7 @@ import GoogleMapsElement from "./components/GoogleMaps/GoogleMaps";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Request from "./components/Request/Request";
+import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Header isLoggedIn={profileState.isLoggedIn}
       setProfileState={setProfileState} 
       />
+      <ProfileInfo profileState={profileState}/>
       <GoogleMapsElement />
       <Request />
     </div>
