@@ -22,7 +22,7 @@ function App() {
       setProfileState={setProfileState} 
       />
       <ProfileInfo profileState={profileState}/>
-      <GoogleMapsElement />
+      <GoogleMapsElement profileState={profileState}/>
       <Request />
     </div>
   );
