@@ -22,10 +22,16 @@ export default {
   getAllCafes: function () {
     return axios.get(process.env.REACT_APP_SERVER_URL + "/api/cafes");
   },
-  likeCafe: function (cafeId, user_id) {
+  likeCafe: function (cafe_id, user_id) {
     return axios.post(
-      process.env.REACT_APP_SERVER_URL + "/api/users/cafes/" + cafeId,
+      process.env.REACT_APP_SERVER_URL + "/api/users/cafes/" + cafe_id,
       user_id
     );
+  },
+  checkIn: function (cafe_id, data) {
+    return axios.post(
+      process.env.REACT_APP_SERVER_URL + "/api/users/checkin/" + cafe_id,
+      data
+    )
   }
 }

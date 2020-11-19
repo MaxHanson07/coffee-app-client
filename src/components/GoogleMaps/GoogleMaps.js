@@ -23,7 +23,7 @@ const center = {
   lng: -122.6668,
 };
 
-export default function GoogleMapsElement() {
+export default function GoogleMapsElement(props) {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -146,6 +146,7 @@ export default function GoogleMapsElement() {
           roasterLink={
             !featured.roasters[0] ? null : featured.roasters[0].website
           }
+          profileState={props.profileState}
         />
       ) : (
         <Info
@@ -169,6 +170,7 @@ export default function GoogleMapsElement() {
               ? null
               : selectedState.roasters[0].website
           }
+          profileState={props.profileState}
         />
       )}
     </>
