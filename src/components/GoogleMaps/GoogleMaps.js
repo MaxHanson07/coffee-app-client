@@ -134,6 +134,10 @@ export default function GoogleMapsElement() {
           instagram_link={featured.instagram_url}
           phone={featured.formatted_phone_number}
           likes={featured.likes}
+          roasterName={!featured.roasters[0] ? null : featured.roasters[0].name}
+          roasterLink={
+            !featured.roasters[0] ? null : featured.roasters[0].website
+          }
         />
       ) : (
         <Info
@@ -148,6 +152,14 @@ export default function GoogleMapsElement() {
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
           likes={selectedState.likes}
+          roasterName={
+            !selectedState.roasters[0] ? null : selectedState.roasters[0].name
+          }
+          roasterLink={
+            !selectedState.roasters[0]
+              ? null
+              : selectedState.roasters[0].website
+          }
         />
       )}
     </>

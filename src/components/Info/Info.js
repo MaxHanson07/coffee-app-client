@@ -5,7 +5,7 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import API from "../../utils/API";
 import "./Info.scss";
@@ -18,7 +18,7 @@ export default function Info(props) {
     e.preventDefault();
 
     if (isLiked === false) {
-      setLiked(props.likes + 1);
+      setLiked(liked + 1);
       setIsLiked(true);
       API.addLike(props.id, { likeValue: liked });
     }
@@ -77,7 +77,11 @@ export default function Info(props) {
         </div>
         <div className="roaster">
           <h5>Roaster</h5>
-          <h4>{props.roaster}</h4>
+          <h4>
+            <a href={props.roasterLink} rel="noreferrer" target="_blank">
+              {props.roasterName}
+            </a>
+          </h4>
         </div>
       </div>
       <Footer />
