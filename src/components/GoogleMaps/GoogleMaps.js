@@ -3,9 +3,9 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import Info from "../Info/Info";
-import Cafe from "./tempInfo.json";
 import CustomMarker from "../../Images/googlemarker.png";
 import "./GoogleMaps.scss";
+import API from "../../utils/API";
 
 const libraries = ["places"];
 const options = {
@@ -30,24 +30,24 @@ export default function GoogleMapsElement() {
 
   const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
-  const [markersState, setMarkersState] = useState(null);
+  const [markersState, setMarkersState] = useState([]);
+  const [featured, setFeatured] = useState(null);
 
   useEffect(() => {
-    setSelectedState();
-    setMarkersState(Cafe);
-
-    if (!navigator.geolocation) {
-      return;
-    } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setUserLocation(position);
-        panTo({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      });
-    }
+    getCafes();
   }, []);
+
+  useEffect(() => {
+    getFeatured();
+  }, [markersState]);
+
+  const getCafes = async () => {
+    try {
+      const { data } = await API.getAllCafes();
+      setMarkersState(data);
+      getUserLocation();
+    } catch (err) {}
+  };
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -64,6 +64,25 @@ export default function GoogleMapsElement() {
     const lat = marker.lat;
     const lng = marker.lng;
     panTo({ lat, lng });
+  };
+
+  const getFeatured = () => {
+    const featured = markersState.find((marker) => marker.is_featured === true);
+    setFeatured(featured);
+  };
+
+  const getUserLocation = () => {
+    if (!navigator.geolocation) {
+      return;
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUserLocation(position);
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
   };
 
   if (loadError) return "Error loading maps";
@@ -94,7 +113,7 @@ export default function GoogleMapsElement() {
           {markersState.map((marker) => {
             return (
               <Marker
-                key={marker.id}
+                key={marker._id}
                 icon={CustomMarker}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => handleMarkerOnClick(marker)}
@@ -104,35 +123,31 @@ export default function GoogleMapsElement() {
         </GoogleMap>
       </div>
 
-      {!selectedState ? (
-        markersState.map((marker) => {
-          if (marker.isFeatured === true) {
-            return (
-              <Info
-                key={marker.id}
-                name={marker.name}
-                image_url={marker.image_url}
-                weekday_hours={marker.weekday_hours}
-                address={marker.address}
-                website={marker.website}
-                instagram_link={marker.instagram_link}
-                phone={marker.phone}
-                roaster={marker.roaster}
-              />
-            );
-          }
-        })
+      {!featured && !selectedState ? null : !selectedState ? (
+        <Info
+          key={featured._id}
+          id={featured._id}
+          name={featured.name}
+          image_url={!featured.photos ? null : featured.photos[0].photo_url}
+          address={featured.formatted_address}
+          website={featured.website}
+          instagram_link={featured.instagram_url}
+          phone={featured.formatted_phone_number}
+          likes={featured.likes}
+        />
       ) : (
         <Info
-          key={selectedState.id}
+          key={selectedState._id}
+          id={selectedState._id}
           name={selectedState.name}
-          image_url={selectedState.image_url}
-          weekday_hours={selectedState.weekday_hours}
-          address={selectedState.address}
+          image_url={
+            !selectedState.photos ? null : selectedState.photos[0].photo_url
+          }
+          address={selectedState.formatted_address}
           website={selectedState.website}
-          instagram_link={selectedState.instagram_link}
-          phone={selectedState.phone}
-          roaster={selectedState.roaster}
+          instagram_link={selectedState.instagram_url}
+          phone={selectedState.formatted_phone_number}
+          likes={selectedState.likes}
         />
       )}
     </>

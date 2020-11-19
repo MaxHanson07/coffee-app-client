@@ -1,11 +1,33 @@
 import { faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
-import { faGlobe, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGlobe,
+  faPhone,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../Footer/Footer";
+import API from "../../utils/API";
 import "./Info.scss";
 
 export default function Info(props) {
+  const [liked, setLiked] = useState(props.likes);
+  const [isLiked, setIsLiked] = useState(false);
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (isLiked === false) {
+      setLiked(props.likes + 1);
+      setIsLiked(true);
+      API.addLike(props.id, { likeValue: liked });
+    }
+
+    if (isLiked === true) {
+      return;
+    }
+  }
+
   return (
     <>
       <div className="Info">
@@ -13,11 +35,12 @@ export default function Info(props) {
         {!props.image_url ? null : (
           <img className="cafe-img" src={props.image_url} alt={props.name} />
         )}
-        <div className="hours">
-          <h5>Likes</h5>
-          <ul>
-            <li>{props.weekday_hours}</li>
-          </ul>
+        <div className="likes">
+          <h5>Likes:</h5>
+          <p>{liked}</p>
+          <button className="likeBtn" onClick={handleFormSubmit}>
+            <FontAwesomeIcon icon={faThumbsUp} size="1x" />
+          </button>
         </div>
         <div className="address">
           <h5>Address</h5>
