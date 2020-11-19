@@ -30,7 +30,7 @@ export default function Info(props) {
 
   return (
     <>
-      <div className="Info">
+      <div className={props.className}>
         <h4>{props.name}</h4>
         {!props.image_url ? null : (
           <img className="cafe-img" src={props.image_url} alt={props.name} />

@@ -79,9 +79,25 @@
   }
 }
 
+.hide {
+  visibility: hidden;
+}
+
 @media screen and (max-width: 1120px) {
   .Info {
-    grid-row: 2 / span 1;
-    grid-column: 3 / span 1;
+    width: 280px;
+    grid-column: 2 / span 1;
+    z-index: 1;
+    margin-left: 520px;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Info {
+    width: 280px;
+    grid-column: 2 / span 1;
+    margin-left: 240px;
+    z-index: 1;
   }
 }

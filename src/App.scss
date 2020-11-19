@@ -11,7 +11,21 @@
 
 @media screen and (max-width: 1120px) {
   .App {
-    grid-template-columns: 1fr minmax(480px, 1fr) minmax(320px, 1fr) 1fr;
-    grid-template-rows: 80px 720px 300px;
+    grid-template-columns: 1fr minmax(800px, 1fr) 1fr;
+    grid-template-rows: 80px 720px 100px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .App {
+    grid-template-columns: 1fr minmax(320px, 1fr) 1fr;
+    grid-template-rows: 80px 720px 100px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .App {
+    grid-template-columns: 1fr minmax(320px, 1fr) 1fr;
+    grid-template-rows: 60px 60px 800px 100px;
   }
 }

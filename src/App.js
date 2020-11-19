@@ -19,8 +19,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Login className="GoogleBtn" setProfileState={setProfileState} />
-      <Logout className="GoogleBtn" setProfileState={setProfileState} />
+      {/* <Login className="GoogleBtn" setProfileState={setProfileState} />
+      <Logout className="GoogleBtn" setProfileState={setProfileState} /> */}
       <GoogleMapsElement />
     </div>
   );

@@ -28,7 +28,6 @@ export default function Request({ onClose }) {
         cafe_address: inputState.address,
         notes: inputState.notes,
       });
-
       setSuccess(true);
     } catch (err) {
       console.log(err);
@@ -71,7 +70,6 @@ export default function Request({ onClose }) {
       <InputField
         value={inputState.address}
         type="text"
-        pattern="[a-zA-Z0-9]"
         name="address"
         placeholder="address"
         onChange={handleInputChange}
@@ -87,7 +85,7 @@ export default function Request({ onClose }) {
       <Button
         className="Btn"
         disabled={inputState.cafe === ""}
-        onClick={(handleFormSubmit, onClose)}
+        onClick={handleFormSubmit}
         name="Submit"
       />
     </form>

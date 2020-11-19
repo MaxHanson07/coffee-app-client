@@ -14,6 +14,7 @@ const options = {
   zoomControl: true,
 };
 const mapContainerStyle = {
+  borderRadius: "10px",
   width: "100%",
   height: "100%",
 };
@@ -31,6 +32,7 @@ export default function GoogleMapsElement() {
   const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [markersState, setMarkersState] = useState([]);
+  const [selectedOn, setSelectedOn] = useState(true);
   const [featured, setFeatured] = useState(null);
 
   useEffect(() => {
@@ -125,6 +127,7 @@ export default function GoogleMapsElement() {
 
       {!featured && !selectedState ? null : !selectedState ? (
         <Info
+          className={selectedOn === true ? "Info" : "Info hide"}
           key={featured._id}
           id={featured._id}
           name={featured.name}
@@ -141,6 +144,7 @@ export default function GoogleMapsElement() {
         />
       ) : (
         <Info
+          className={selectedOn === true ? "Info" : "Info hide"}
           key={selectedState._id}
           id={selectedState._id}
           name={selectedState.name}
