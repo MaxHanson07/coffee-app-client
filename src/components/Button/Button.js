@@ -2,9 +2,5 @@ import React from "react";
 import "./Button.scss";
 
 export default function Button(props) {
-  return (
-    <button className="Btn" {...props}>
-      {props.name}
-    </button>
-  );
+  return <button {...props}>{props.name}</button>;
 }
