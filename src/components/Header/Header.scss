@@ -1,7 +1,8 @@
+@import url("https://use.typekit.net/rvw7fnr.css");
 header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
   grid-row: 1 / span 1;
   grid-column: 1 / span 6;
   background-color: #1c1919;
@@ -11,7 +12,31 @@ header {
     width: 43px;
     height: 40px;
   }
+
+  .signIn {
+    grid-row: 1 / span 1;
+    grid-column: 4 / span 1;
+    margin-right : 20px;
+  }
+
+  .signInBtn {
+    background-color: rgb(255, 255, 255); 
+    display: inline-flex; 
+    align-items: center; 
+    color: rgba(0, 0, 0, 0.54); 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px; 
+    padding: 10px; 
+    border-radius: 40px;
+    border: 1px solid transparent; 
+    font-size: 14px; 
+    font-weight: 500; 
+    font-family: "interstate", "san-serif";
+    span {
+      margin-left: 10px;
+    }
+  }
 }
+
 
 @media screen and (max-width: 1120px) {
   header {
