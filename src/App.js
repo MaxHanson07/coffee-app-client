@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Request from "./components/Request/Request";
 import Login from "./components/Login/Login";
 import Logout from "./components/Logout/Logout";
+import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 
 function App() {
   const [profileState, setProfileState] = useState({
@@ -21,6 +22,11 @@ function App() {
       <Header />
       {/* <Login className="GoogleBtn" setProfileState={setProfileState} />
       <Logout className="GoogleBtn" setProfileState={setProfileState} /> */}
+      <Header
+        isLoggedIn={profileState.isLoggedIn}
+        setProfileState={setProfileState}
+      />
+      <ProfileInfo profileState={profileState} />
       <GoogleMapsElement />
     </div>
   );

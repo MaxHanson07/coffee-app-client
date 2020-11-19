@@ -4,16 +4,23 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import Request from "../Request/Request";
 import Logo from "../../Images/logo.png";
+import GoogleSignIn from "../GoogleSignIn/GoogleSignIn"
 import "./Header.scss";
 import Modal from "../Modal/Modal";
 
+<<<<<<< HEAD
 export default function Header() {
   const [show, setShow] = useState(false);
 
+=======
+
+export default function Header({ isLoggedIn, setProfileState }) {
+>>>>>>> main
   return (
     <>
       <header>
         <img className="logo" src={Logo} alt="Coffee App Logo" />
+<<<<<<< HEAD
       </header>
       <div className="Btns">
         <Button
@@ -27,6 +34,13 @@ export default function Header() {
       <Modal open={show} onClose={() => setShow(false)}>
         <Request />
       </Modal>
+=======
+        <GoogleSignIn
+          isLoggedIn={isLoggedIn}
+          setProfileState={setProfileState}
+        />
+      </header>
+>>>>>>> main
     </>
   );
 }
