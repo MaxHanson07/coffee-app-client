@@ -55,8 +55,8 @@ export default function GoogleMapsElement() {
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(13);
+    mapRef.current?.panTo({ lat, lng });
+    mapRef.current?.setZoom(13);
   }, []);
 
   const handleMarkerOnClick = (marker) => {

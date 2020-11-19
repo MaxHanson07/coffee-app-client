@@ -7,4 +7,10 @@ export default {
       cafeData
     );
   },
+  login: function (tokenId) {
+    return axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/api/users/oauth`,
+      tokenId
+    );
+  }
 };
