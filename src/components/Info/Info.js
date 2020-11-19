@@ -7,9 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
-import "./Info.scss";
-import Button from "../Button/Button";
 import API from "../../utils/API";
+import "./Info.scss";
 
 export default function Info(props) {
   const [liked, setLiked] = useState(props.likes);
@@ -25,9 +24,7 @@ export default function Info(props) {
     }
 
     if (isLiked === true) {
-      setLiked(props.likes - 1);
-      setIsLiked(false);
-      API.addLike(props.id, { likeValue: liked });
+      return;
     }
   }
 
@@ -41,7 +38,7 @@ export default function Info(props) {
         <div className="likes">
           <h5>Likes:</h5>
           <p>{liked}</p>
-          <button onClick={handleFormSubmit}>
+          <button className="likeBtn" onClick={handleFormSubmit}>
             <FontAwesomeIcon icon={faThumbsUp} size="1x" />
           </button>
         </div>
