@@ -85,6 +85,7 @@ export default function Request() {
       />
 
       <Button
+        className="Btn"
         disabled={inputState.cafe === ""}
         onClick={handleFormSubmit}
         name="Submit"

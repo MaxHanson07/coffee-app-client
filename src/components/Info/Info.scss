@@ -1,4 +1,4 @@
-@import "../../SCSS/variables.scss";
+@import url("https://use.typekit.net/rvw7fnr.css");
 
 .Info {
   grid-row: 2 / span 1;
@@ -6,24 +6,24 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 520px;
+  height: 660px;
   margin: 40px 40px;
   padding: 20px 0;
   background-color: #fff;
   border-radius: 10px;
   border: none;
-  box-shadow: $box-shadow;
-  font-family: $font-family;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  font-family: "interstate", "san-serif";
 
   a {
-    color: $black;
+    color: #1c1919;
 
     &:hover {
-      color: $black;
+      color: #1c1919;
       font-weight: 700;
     }
     &:visited {
-      color: $black;
+      color: #1c1919;
     }
   }
 
@@ -31,27 +31,28 @@
     padding: 0 10px;
   }
   .cafe-img {
-    height: 220px;
     margin: 4px auto;
     width: 98%;
     border-radius: 4px;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
   }
 
-  .hours {
+  .likes {
+    display: flex;
+    align-items: center;
     height: 40px;
     padding: 2px 10px;
     margin: 10px 10px 4px 10px;
-    box-shadow: $box-shadow;
-    li {
-      font-size: 13px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    p {
+      margin: 0 4px;
     }
   }
   .address {
     height: 60px;
     padding: 2px 10px;
     margin: 4px 10px;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
     p {
       font-size: 13px;
     }
@@ -60,7 +61,7 @@
     height: 120px;
     padding: 2px 10px;
     margin: 4px 10px;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
     li {
       font-size: 13px;
       margin: 4px 0;
@@ -70,7 +71,7 @@
     height: 60px;
     padding: 2px 10px;
     margin: 4px 10px;
-    box-shadow: $box-shadow;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
 
     h4 {
       text-align: center;
