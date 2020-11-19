@@ -1,12 +1,12 @@
 @import url("https://use.typekit.net/rvw7fnr.css");
 
 .profile-info {
-  grid-row: 3 / span 1;
-  grid-column: 1 / span 2;
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 400px;
+  height: 200px;
   margin: 40px 40px;
   padding: 20px 0;
   background-color: #fff;
@@ -22,10 +22,10 @@
   }
   .profile-img {
     margin: 4px auto;
-    width: 98%;
-    border-radius: 4px;
+    width: 100px;
+    border-radius: 50px;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  } 
+  }
 }
 
 @media screen and (max-width: 1120px) {

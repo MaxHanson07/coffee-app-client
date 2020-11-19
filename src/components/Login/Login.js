@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import API from "../../utils/API";
+import "./Login.scss";
 
 export default function Login({ setProfileState }) {
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -29,6 +30,7 @@ export default function Login({ setProfileState }) {
 
   return (
     <GoogleLogin
+      className="googleBtn"
       clientId={clientId}
       buttonText="Login"
       onSuccess={onSuccess}
