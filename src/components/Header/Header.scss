@@ -11,6 +11,23 @@ header {
     width: 43px;
     height: 40px;
   }
+
+  .icon {
+    color: #fff;
+
+    &:hover {
+      color: #05c7f2;
+    }
+    &:active {
+      color: #2de398;
+    }
+  }
+
+  .addRequestBtn {
+    border: none;
+    outline: none;
+    background-color: #1c1919;
+  }
 }
 
 @media screen and (max-width: 1120px) {

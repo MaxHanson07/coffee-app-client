@@ -4,7 +4,7 @@ import InputField from "../InputField/InputField";
 import API from "../../utils/API";
 import "./Request.scss";
 
-export default function Request() {
+export default function Request({ onClose }) {
   const [inputState, setInputState] = useState({
     email: "",
     cafe: "",
@@ -87,7 +87,7 @@ export default function Request() {
       <Button
         className="Btn"
         disabled={inputState.cafe === ""}
-        onClick={handleFormSubmit}
+        onClick={(handleFormSubmit, onClose)}
         name="Submit"
       />
     </form>
