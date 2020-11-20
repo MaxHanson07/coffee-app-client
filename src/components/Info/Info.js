@@ -6,8 +6,9 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Footer from "../Footer/Footer";
+import Button from "../Button/Button";
 import API from "../../utils/API";
 import "./Info.scss";
 
@@ -17,13 +18,9 @@ export default function Info(props) {
   const [canCheckIn, setCanCheckIn] = useState(true);
   const [success, setSuccess] = useState(false);
 
-
   // Check if Check In should be displayed. Check again every time state changes, or at least every minute
-  useEffect(() => {
-    checkCheckIn();
-  }, [props, canCheckIn]);
-
-  function checkCheckIn() {
+  const checkCheckIn = useRef(() => {});
+  checkCheckIn.current = () => {
     let lastCheckIn = localStorage.getItem("checkIn" + props.id);
     if (lastCheckIn) {
       if (Date.now() - lastCheckIn < 36e5) {
@@ -35,10 +32,14 @@ export default function Info(props) {
     } else {
       setCanCheckIn(true);
     }
-    setTimeout(checkCheckIn, 2000);
-  }
+    setTimeout(checkCheckIn.current, 2000);
+  };
 
-  function handleFormSubmit(e) {
+  useEffect(() => {
+    checkCheckIn.current();
+  }, [props, canCheckIn]);
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     if (isLiked === false) {
@@ -50,9 +51,9 @@ export default function Info(props) {
     if (isLiked === true) {
       return;
     }
-  }
+  };
 
-  async function checkIn(cafe_id, user_id) {
+  const checkIn = async (cafe_id, user_id) => {
     try {
       localStorage.setItem("checkIn" + cafe_id, Date.now());
       let data = {
@@ -61,14 +62,14 @@ export default function Info(props) {
       };
       await API.checkIn(cafe_id, data);
       setCanCheckIn(false);
-      setSuccess(true)
+      setSuccess(true);
       setTimeout(function () {
         setSuccess(false);
       }, 1000);
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <>
@@ -77,31 +78,35 @@ export default function Info(props) {
         {!props.image_url ? null : (
           <img className="cafe-img" src={props.image_url} alt={props.name} />
         )}
+        <div className="Response">
+          {success === true ? <p>Checked In!</p> : null}
+        </div>
         <div className="check-like">
           <div className="like">
             <h5>Likes:</h5>
             <p>{liked}</p>
-            <button className="likeBtn" onClick={handleFormSubmit}>
-              <FontAwesomeIcon icon={faThumbsUp} size="1x" />
-            </button>
+            <Button
+              className="likeBtn"
+              onClick={handleFormSubmit}
+              name={<FontAwesomeIcon icon={faThumbsUp} size="1x" />}
+            />
           </div>
           {props.profileState?.isLoggedIn && canCheckIn ? (
             <div className="checkedIn">
-              <a
-                href="#"
+              <button
+                className="recentCafeBtn"
                 onClick={(e) => {
                   e.preventDefault();
                   checkIn(props.id, props.profileState.user_id);
                 }}
               >
-                <FontAwesomeIcon icon={faCheck} size="1x" /> Check in
-              </a>
+                <FontAwesomeIcon icon={faCheck} size="1x" />
+                &nbsp;Check in
+              </button>
             </div>
           ) : null}
         </div>
-          <div className="Response">
-            {success === true ? <p>Checked In!</p> : null}
-          </div>
+
         <div className="address">
           <h5>Address</h5>
           <p>{props.address}</p>

@@ -4,7 +4,7 @@ import InputField from "../InputField/InputField";
 import API from "../../utils/API";
 import "./Request.scss";
 
-export default function Request({ onClose }) {
+export default function Request() {
   const [inputState, setInputState] = useState({
     email: "",
     cafe: "",
@@ -19,7 +19,7 @@ export default function Request({ onClose }) {
     setInputState({ ...inputState, [name]: value });
   };
 
-  async function handleFormSubmit(event) {
+  const handleFormSubmit = async (event) => {
     try {
       event.preventDefault();
       API.createRequest({
@@ -43,7 +43,7 @@ export default function Request({ onClose }) {
     setTimeout(function () {
       setSuccess(false);
     }, 1000);
-  }
+  };
 
   return (
     <form className="Request">

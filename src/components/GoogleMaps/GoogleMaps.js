@@ -36,21 +36,28 @@ export default function GoogleMapsElement(props) {
   const [selectedOn, setSelectedOn] = useState(true);
   const [featured, setFeatured] = useState(null);
 
-  useEffect(() => {
-    getCafes();
-  }, []);
-
-  useEffect(() => {
-    getFeatured();
-  }, [markersState]);
-
-  const getCafes = async () => {
+  const getCafes = useRef(() => {});
+  getCafes.current = async () => {
     try {
       const { data } = await API.getAllCafes();
       setMarkersState(data);
       getUserLocation();
     } catch (err) {}
   };
+
+  useEffect(() => {
+    getCafes.current();
+  }, []);
+
+  const getFeatured = useRef(() => {});
+  getFeatured.current = () => {
+    const featured = markersState.find((marker) => marker.is_featured === true);
+    setFeatured(featured);
+  };
+
+  useEffect(() => {
+    getFeatured.current();
+  }, [markersState]);
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -68,11 +75,6 @@ export default function GoogleMapsElement(props) {
     const lat = marker.lat;
     const lng = marker.lng;
     panTo({ lat, lng });
-  };
-
-  const getFeatured = () => {
-    const featured = markersState.find((marker) => marker.is_featured === true);
-    setFeatured(featured);
   };
 
   const getUserLocation = () => {
@@ -98,7 +100,10 @@ export default function GoogleMapsElement(props) {
   return (
     <>
       <SearchBar panTo={panTo} />
-      <ProfileInfo profileState={props.profileState} handleCafeClick={handleMarkerOnClick}/>
+      <ProfileInfo
+        profileState={props.profileState}
+        handleCafeClick={handleMarkerOnClick}
+      />
       <div className="GoogleMaps">
         <GoogleMap
           id="map"
