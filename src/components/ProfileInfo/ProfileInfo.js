@@ -16,7 +16,7 @@ export default function ProfileInfo({ profileState, handleCafeClick }) {
 
     function checkIfAlreadyExist(currentVal) {
       return accumulator.some(function (item) {
-        return item.cafe_id.name === currentVal.cafe_id.name;
+        return item.cafe_id?.name === currentVal.cafe_id?.name;
       });
     }
   },
@@ -38,19 +38,23 @@ export default function ProfileInfo({ profileState, handleCafeClick }) {
           <h4>{profileState.name}</h4>
           <div className="recentCafes">
             <h5>Your recent cafes</h5>
-            {check_ins.map((check_in) => {
-              return (
-                <Button
+            <ul>
+              {check_ins.map((check_in) => {
+                return (
+                  <li>
+                  <Button
                   className="recentCafeBtn"
                   key={check_in.timestamp}
                   onClick={(e) => {
                     e.preventDefault();
                     handleCafeClick(check_in.cafe_id);
                   }}
-                  name={check_in.cafe_id.name}
-                />
-              );
-            })}
+                  name={check_in.cafe_id?.name}
+                  />
+                  </li>
+                  );
+                })}
+                </ul>
           </div>
         </div>
       ) : null}
