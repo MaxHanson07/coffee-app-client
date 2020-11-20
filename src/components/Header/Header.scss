@@ -8,30 +8,6 @@ header {
     width: 43px;
     height: 40px;
   }
-
-  .signIn {
-    grid-row: 1 / span 1;
-    grid-column: 4 / span 1;
-    margin-right: 20px;
-  }
-
-  .signInBtn {
-    background-color: rgb(255, 255, 255);
-    display: inline-flex;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.54);
-    border: none;
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    border-radius: 40px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: "interstate", "san-serif";
-    cursor: pointer;
-    span {
-      margin-left: 10px;
-    }
-  }
 }
 
 .Btns {
@@ -41,11 +17,11 @@ header {
   justify-content: center;
   align-items: center;
   width: 80%;
-  .signIn {
-    grid-row: 1 / span 1;
-    grid-column: 4 / span 1;
-    margin-right: 20px;
-  }
+  // .signIn {
+  //   grid-row: 1 / span 1;
+  //   grid-column: 4 / span 1;
+  //   margin-right: 20px;
+  // }
 
   .signInBtn {
     background-color: rgb(255, 255, 255);
@@ -59,6 +35,7 @@ header {
     font-size: 14px;
     font-weight: 500;
     font-family: "interstate", "san-serif";
+    margin-right: 10px;
     cursor: pointer;
     span {
       margin-left: 10px;
@@ -92,6 +69,7 @@ header {
   .Btns {
     grid-column: 2 / span 1;
     z-index: 1;
+    width: 100%;
     justify-content: flex-end;
     margin-right: 40px;
   }

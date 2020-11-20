@@ -17,7 +17,8 @@
 @media screen and (max-width: 800px) {
   .GoogleMaps {
     grid-column: 1 / span 3;
-    width: 95vw;
+    width: 90vw;
+    margin: 40px auto;
   }
 }
 
@@ -25,6 +26,7 @@
   .GoogleMaps {
     margin-top: 0;
     grid-row: 3 / span 1;
+    width: 100vw;
     height: 88vh;
   }
 }
