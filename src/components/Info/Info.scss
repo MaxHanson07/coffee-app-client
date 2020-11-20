@@ -37,9 +37,10 @@
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
   }
 
-  .likes {
+  .check-like {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     height: 40px;
     padding: 2px 10px;
     margin: 10px 10px 4px 10px;
@@ -47,7 +48,20 @@
     p {
       margin: 0 4px;
     }
+
+    .like {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkedIn {
+      display: flex;
+      align-items: center;
+      margin-left: 40px;
+      font-size: 13px;
+    }
   }
+
   .address {
     height: 60px;
     padding: 2px 10px;
