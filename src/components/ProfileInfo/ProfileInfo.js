@@ -41,20 +41,20 @@ export default function ProfileInfo({ profileState, handleCafeClick }) {
             <ul>
               {check_ins.map((check_in) => {
                 return (
-                  <li>
-                  <Button
-                  className="recentCafeBtn"
-                  key={check_in.timestamp}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCafeClick(check_in.cafe_id);
-                  }}
-                  name={check_in.cafe_id?.name}
-                  />
+                  <li key={check_in.timestamp}>
+                    <Button
+                      className="recentCafeBtn"
+                      key={check_in.timestamp}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCafeClick(check_in.cafe_id);
+                      }}
+                      name={check_in.cafe_id?.name}
+                    />
                   </li>
-                  );
-                })}
-                </ul>
+                );
+              })}
+            </ul>
           </div>
         </div>
       ) : null}
