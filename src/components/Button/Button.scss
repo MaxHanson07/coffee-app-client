@@ -27,3 +27,18 @@
   outline: none;
   background-color: #fff;
 }
+
+.X {
+  float: right;
+  margin-left: 10px;
+  z-index: 1;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  &:hover {
+    color: #05c7f2;
+  }
+  &:active {
+    color: #2de398;
+  }
+}

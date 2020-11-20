@@ -14,6 +14,7 @@ const options = {
   zoomControl: true,
 };
 const mapContainerStyle = {
+  borderRadius: "10px",
   width: "100%",
   height: "100%",
 };
@@ -31,6 +32,7 @@ export default function GoogleMapsElement(props) {
   const [userLocation, setUserLocation] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [markersState, setMarkersState] = useState([]);
+  const [selectedOn, setSelectedOn] = useState(true);
   const [featured, setFeatured] = useState(null);
 
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function GoogleMapsElement(props) {
   }, []);
 
   const handleMarkerOnClick = (marker) => {
+    setSelectedOn(true);
     setSelectedState(marker);
     const lat = marker.lat;
     const lng = marker.lng;
@@ -85,6 +88,9 @@ export default function GoogleMapsElement(props) {
     }
   };
 
+  const onMapClick = useCallback((e) => {
+    setSelectedOn(false);
+  }, []);
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps";
 
@@ -99,6 +105,7 @@ export default function GoogleMapsElement(props) {
           center={center}
           options={options}
           onLoad={onMapLoad}
+          onClick={onMapClick}
         >
           {!userLocation ? null : (
             <Marker
@@ -125,6 +132,7 @@ export default function GoogleMapsElement(props) {
 
       {!featured && !selectedState ? null : !selectedState ? (
         <Info
+          className={selectedOn === true ? "Info" : "Info hide"}
           key={featured._id}
           id={featured._id}
           name={featured.name}
@@ -134,10 +142,15 @@ export default function GoogleMapsElement(props) {
           instagram_link={featured.instagram_url}
           phone={featured.formatted_phone_number}
           likes={featured.likes}
+          roasterName={!featured.roasters[0] ? null : featured.roasters[0].name}
+          roasterLink={
+            !featured.roasters[0] ? null : featured.roasters[0].website
+          }
           profileState={props.profileState}
         />
       ) : (
         <Info
+          className={selectedOn === true ? "Info" : "Info hide"}
           key={selectedState._id}
           id={selectedState._id}
           name={selectedState.name}
@@ -149,6 +162,14 @@ export default function GoogleMapsElement(props) {
           instagram_link={selectedState.instagram_url}
           phone={selectedState.formatted_phone_number}
           likes={selectedState.likes}
+          roasterName={
+            !selectedState.roasters[0] ? null : selectedState.roasters[0].name
+          }
+          roasterLink={
+            !selectedState.roasters[0]
+              ? null
+              : selectedState.roasters[0].website
+          }
           profileState={props.profileState}
         />
       )}

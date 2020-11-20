@@ -4,7 +4,7 @@ import InputField from "../InputField/InputField";
 import API from "../../utils/API";
 import "./Request.scss";
 
-export default function Request() {
+export default function Request({ onClose }) {
   const [inputState, setInputState] = useState({
     email: "",
     cafe: "",
@@ -28,7 +28,6 @@ export default function Request() {
         cafe_address: inputState.address,
         notes: inputState.notes,
       });
-
       setSuccess(true);
     } catch (err) {
       console.log(err);
@@ -71,7 +70,6 @@ export default function Request() {
       <InputField
         value={inputState.address}
         type="text"
-        pattern="[a-zA-Z0-9]"
         name="address"
         placeholder="address"
         onChange={handleInputChange}
