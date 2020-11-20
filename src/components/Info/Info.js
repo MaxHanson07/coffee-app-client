@@ -15,6 +15,8 @@ export default function Info(props) {
   const [liked, setLiked] = useState(props.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [canCheckIn, setCanCheckIn] = useState(true);
+  const [success, setSuccess] = useState(false);
+
 
   // Check if Check In should be displayed. Check again every time state changes, or at least every minute
   useEffect(() => {
@@ -59,6 +61,10 @@ export default function Info(props) {
       };
       await API.checkIn(cafe_id, data);
       setCanCheckIn(false);
+      setSuccess(true)
+      setTimeout(function () {
+        setSuccess(false);
+      }, 1000);
     } catch (err) {
       console.error(err);
     }
@@ -93,6 +99,9 @@ export default function Info(props) {
             </div>
           ) : null}
         </div>
+          <div className="Response">
+            {success === true ? <p>Checked In!</p> : null}
+          </div>
         <div className="address">
           <h5>Address</h5>
           <p>{props.address}</p>
@@ -124,19 +133,6 @@ export default function Info(props) {
                 <FontAwesomeIcon icon={faPhone} size="1x" /> {props.phone}
               </li>
             )}
-            {props.profileState?.isLoggedIn && canCheckIn ? (
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    checkIn(props.id, props.profileState.user_id);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="1x" /> Check in
-                </a>
-              </li>
-            ) : null}
           </ul>
         </div>
         <div className="roaster">
