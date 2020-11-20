@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GoogleMapsElement from "./components/GoogleMaps/GoogleMaps";
 import "./App.scss";
 import Header from "./components/Header/Header";
-import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 
 function App() {
   const [profileState, setProfileState] = useState({
@@ -10,7 +9,7 @@ function App() {
     name: "",
     photo_url: "",
     email: "",
-    liked_cafes: "",
+    check_ins: [],
     isLoggedIn: false,
   });
 
@@ -20,7 +19,6 @@ function App() {
         isLoggedIn={profileState.isLoggedIn}
         setProfileState={setProfileState}
       />
-      <ProfileInfo profileState={profileState} />
       <GoogleMapsElement profileState={profileState} />
     </div>
   );

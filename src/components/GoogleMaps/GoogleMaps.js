@@ -3,6 +3,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import SearchBar from "../SearchBar/SearchBar";
 import Info from "../Info/Info";
+import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import CustomMarker from "../../Images/googlemarker.png";
 import "./GoogleMaps.scss";
 import API from "../../utils/API";
@@ -97,6 +98,7 @@ export default function GoogleMapsElement(props) {
   return (
     <>
       <SearchBar panTo={panTo} />
+      <ProfileInfo profileState={props.profileState} handleCafeClick={handleMarkerOnClick}/>
       <div className="GoogleMaps">
         <GoogleMap
           id="map"

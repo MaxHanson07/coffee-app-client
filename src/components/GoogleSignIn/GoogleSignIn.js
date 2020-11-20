@@ -14,7 +14,7 @@ export default function GoogleSignIn({ isLoggedIn, setProfileState }) {
                 name: data.name,
                 photo_url: data.photo_url,
                 email: data.email,
-                liked_cafes: data.liked_cafes,
+                check_ins: data.check_ins,
                 isLoggedIn: true
             })
         } catch (err) {
@@ -32,7 +32,7 @@ export default function GoogleSignIn({ isLoggedIn, setProfileState }) {
             name: "",
             photo_url: "",
             email: "",
-            liked_cafes: [],
+            check_ins: [],
             isLoggedIn: false
         })
     }
