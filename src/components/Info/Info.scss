@@ -111,10 +111,18 @@
   .Info {
     width: 280px;
     grid-column: 2 / span 1;
-    margin-left: 240px;
+    margin-left: 220px;
     z-index: 1;
   }
   .hide {
     visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .Info {
+    grid-row: 3 / span 1;
+    margin-top: 30px;
+    margin-left: 120px;
   }
 }
