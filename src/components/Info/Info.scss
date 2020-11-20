@@ -27,6 +27,16 @@
     }
   }
 
+  .Response {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    font-size: 12px;
+    color: #2de398;
+  }
+
   h4 {
     padding: 0 10px;
   }
@@ -37,9 +47,10 @@
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
   }
 
-  .likes {
+  .check-like {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     height: 40px;
     padding: 2px 10px;
     margin: 10px 10px 4px 10px;
@@ -47,7 +58,20 @@
     p {
       margin: 0 4px;
     }
+
+    .like {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkedIn {
+      display: flex;
+      align-items: center;
+      margin-left: 40px;
+      font-size: 13px;
+    }
   }
+
   .address {
     height: 60px;
     padding: 2px 10px;
@@ -79,9 +103,36 @@
   }
 }
 
+.hide {
+  visibility: visible;
+}
+
 @media screen and (max-width: 1120px) {
   .Info {
-    grid-row: 2 / span 1;
-    grid-column: 3 / span 1;
+    width: 280px;
+    grid-column: 2 / span 1;
+    z-index: 1;
+    margin-left: 520px;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Info {
+    width: 280px;
+    grid-column: 2 / span 1;
+    margin-left: 220px;
+    z-index: 1;
+  }
+  .hide {
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .Info {
+    grid-row: 3 / span 1;
+    margin-top: 30px;
+    margin-left: 120px;
   }
 }

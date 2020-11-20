@@ -15,32 +15,34 @@ export default function Info(props) {
   const [liked, setLiked] = useState(props.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [canCheckIn, setCanCheckIn] = useState(true);
+  const [success, setSuccess] = useState(false);
+
 
   // Check if Check In should be displayed. Check again every time state changes, or at least every minute
   useEffect(() => {
-    checkCheckIn()
-  }, [props, canCheckIn])
+    checkCheckIn();
+  }, [props, canCheckIn]);
 
   function checkCheckIn() {
-    let lastCheckIn = localStorage.getItem("checkIn" + props.id)
+    let lastCheckIn = localStorage.getItem("checkIn" + props.id);
     if (lastCheckIn) {
       if (Date.now() - lastCheckIn < 36e5) {
-        setCanCheckIn(false)
+        setCanCheckIn(false);
       } else {
-        localStorage.removeItem("checkIn" + props.id)
-        setCanCheckIn(true)
+        localStorage.removeItem("checkIn" + props.id);
+        setCanCheckIn(true);
       }
     } else {
-      setCanCheckIn(true)
+      setCanCheckIn(true);
     }
-    setTimeout(checkCheckIn, 2000)
+    setTimeout(checkCheckIn, 2000);
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
     if (isLiked === false) {
-      setLiked(props.likes + 1);
+      setLiked(liked + 1);
       setIsLiked(true);
       API.addLike(props.id, { likeValue: liked });
     }
@@ -52,32 +54,54 @@ export default function Info(props) {
 
   async function checkIn(cafe_id, user_id) {
     try {
-      localStorage.setItem("checkIn" + cafe_id, Date.now())
+      localStorage.setItem("checkIn" + cafe_id, Date.now());
       let data = {
         user_id: user_id,
-        date: Date.now()
-      }
-      await API.checkIn(cafe_id, data)
-      setCanCheckIn(false)
+        date: Date.now(),
+      };
+      await API.checkIn(cafe_id, data);
+      setCanCheckIn(false);
+      setSuccess(true)
+      setTimeout(function () {
+        setSuccess(false);
+      }, 1000);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
   return (
     <>
-      <div className="Info">
+      <div className={props.className}>
         <h4>{props.name}</h4>
         {!props.image_url ? null : (
           <img className="cafe-img" src={props.image_url} alt={props.name} />
         )}
-        <div className="likes">
-          <h5>Likes:</h5>
-          <p>{liked}</p>
-          <button className="likeBtn" onClick={handleFormSubmit}>
-            <FontAwesomeIcon icon={faThumbsUp} size="1x" />
-          </button>
+        <div className="check-like">
+          <div className="like">
+            <h5>Likes:</h5>
+            <p>{liked}</p>
+            <button className="likeBtn" onClick={handleFormSubmit}>
+              <FontAwesomeIcon icon={faThumbsUp} size="1x" />
+            </button>
+          </div>
+          {props.profileState?.isLoggedIn && canCheckIn ? (
+            <div className="checkedIn">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  checkIn(props.id, props.profileState.user_id);
+                }}
+              >
+                <FontAwesomeIcon icon={faCheck} size="1x" /> Check in
+              </a>
+            </div>
+          ) : null}
         </div>
+          <div className="Response">
+            {success === true ? <p>Checked In!</p> : null}
+          </div>
         <div className="address">
           <h5>Address</h5>
           <p>{props.address}</p>
@@ -109,24 +133,15 @@ export default function Info(props) {
                 <FontAwesomeIcon icon={faPhone} size="1x" /> {props.phone}
               </li>
             )}
-            {props.profileState?.isLoggedIn && canCheckIn ? (
-              <li>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    checkIn(props.id, props.profileState.user_id)
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCheck} size="1x" /> Check in
-                  </a>
-              </li>
-            ) : null}
           </ul>
         </div>
         <div className="roaster">
           <h5>Roaster</h5>
-          <h4>{props.roaster}</h4>
+          <h4>
+            <a href={props.roasterLink} rel="noreferrer" target="_blank">
+              {props.roasterName}
+            </a>
+          </h4>
         </div>
       </div>
       <Footer />
