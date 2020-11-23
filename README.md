@@ -17,9 +17,11 @@
 
 ### General info
 
-To see a full video walk through of the app check that out here: Coming Soon!
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/68626350/99983567-dd6dc100-2d60-11eb-8335-3461f86882c2.gif)
 
-<>
+Spend Less time finding good coffee and more time enjoying it. Cfe is a React browser app that allows the user to search for good coffee through a curated map search. Check in to the places you like when you sign up for your own profile using Google Oauth.
+
+<https://cfe-client.herokuapp.com/>
 
 To checkout the other repos associated with this app check out these links:
 
